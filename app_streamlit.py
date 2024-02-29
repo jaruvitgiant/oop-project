@@ -2,44 +2,40 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-df = pd.DataFrame(
-    [
-       {"command": "st.selectbox", "rating": 4, "is_widget": True},
-       {"command": "st.balloons", "rating": 5, "is_widget": False},
-       {"command": "st.time_input", "rating": 3, "is_widget": True},
-   ]
-)
-edited_df = st.data_editor(df)
+st.sidebar.title("เพศ")
+page = st.sidebar.radio("Choose", ["ชาย", "หญิง",])
+if page == "ชาย":
+    st.title("ชาย")
+elif page == "หญิง":
+    st.title("หญิง")
 
-favorite_command = edited_df.loc[edited_df["rating"].idxmax()]["command"]
-st.markdown(f"Your favorite command is **{favorite_command}** 🎈")
-col1, col2, col3 = st.columns(3)
-with col1:
-   st.header("A cat")
-   st.image("https://static.streamlit.io/examples/cat.jpg")
-
-with col2:
-   st.header("A dog")
-   st.image("https://static.streamlit.io/examples/dog.jpg")
-
-with col3:
-   st.header("An owl")
-   st.image("https://static.streamlit.io/examples/owl.jpg")
 add_selectbox = st.sidebar.selectbox(
-    "How would you like to be contacted?",
-    ("Email", "Home phone", "Mobile phone")
+    "เลือกซื้อตามราคา",
+    ("2000$", "30000$")
 )
+for idx, img in enumerate(filteredImages): 
+        cols = st.beta_columns(4) 
+        
+        cols[0].image("https://static.streamlit.io/examples/cat.jpg",[idx], use_column_width=True)
+        idx+=1
+        cols[1].image("https://static.streamlit.io/examples/cat.jpg",[idx], use_column_width=True)
+        idx+=idx
+        cols[2].image("https://static.streamlit.io/examples/cat.jpg",[idx], use_column_width=True)
+        idx+=idx
+        cols[3].image("https://static.streamlit.io/examples/cat.jpg",[idx], use_column_width=True)
+        idx+=idx
 
-with st.sidebar:
-    col1, col2 = st.columns([3, 1])
-    data = np.random.randn(10, 1)
-
-    col1.subheader("A wide column with a chart")
-    col1.line_chart(data)
-
-    col2.subheader("A narrow column with the data")
-    col2.write(data)
-
+# col1, col2, col3 = st.columns(3)
+# image_size = (300, 300)
+# with col2( width=image_size[0], height=image_size[1]):
+#    st.header("A cat")
+#    st.image("https://static.streamlit.io/examples/cat.jpg")
+# with col2:
+#    st.header("A dog")
+#    st.image("https://static.streamlit.io/examples/dog.jpg")
+# with col3:
+#    st.header("An owl")
+#    st.image("https://static.streamlit.io/examples/owl.jpg")
 page_bg_img = f"""
 <style>
 [data-testid="stAppViewContainer"] > .main {{
