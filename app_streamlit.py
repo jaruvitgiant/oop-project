@@ -2,40 +2,54 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+#sidebar
 st.sidebar.title("เพศ")
-page = st.sidebar.radio("Choose", ["ชาย", "หญิง",])
-if page == "ชาย":
+people = st.sidebar.radio("Choose", ["ชาย", "หญิง",])
+if people == "ชาย":
     st.title("ชาย")
-elif page == "หญิง":
+elif people == "หญิง":
     st.title("หญิง")
+st.sidebar.title("เลือกซื้อตามราคา")
+price = st.sidebar.radio("Choose", ["ต่ำกว่า2000$", "2000-4000",])
+st.sidebar.title("ลดราคา&ข้อเสนอ")
+price_offer = st.sidebar.radio("Choose", ["ล้างสต๊อก",])
+st.sidebar.title("สี")
+col1, col2 = st.sidebar.columns(2)
+checked1 = col1.checkbox("สีเเดง", key="checkbox_1")
+checked2 = col2.checkbox("สีเขียว", key="checkbox_2")
 
-add_selectbox = st.sidebar.selectbox(
-    "เลือกซื้อตามราคา",
-    ("2000$", "30000$")
+checked3 = col1.checkbox("สีดำ", key="checkbox_3")
+checked4 = col2.checkbox("สีขาว", key="checkbox_4")
+col1.markdown(
+    f"""<style>
+     {{
+        background-color: {'#00ff00' if checked1 or checked3 else '#33CC33'};
+    }}
+    </style>""",
+    unsafe_allow_html=True,
 )
-for idx, img in enumerate(filteredImages): 
-        cols = st.beta_columns(4) 
-        
-        cols[0].image("https://static.streamlit.io/examples/cat.jpg",[idx], use_column_width=True)
-        idx+=1
-        cols[1].image("https://static.streamlit.io/examples/cat.jpg",[idx], use_column_width=True)
-        idx+=idx
-        cols[2].image("https://static.streamlit.io/examples/cat.jpg",[idx], use_column_width=True)
-        idx+=idx
-        cols[3].image("https://static.streamlit.io/examples/cat.jpg",[idx], use_column_width=True)
-        idx+=idx
+col2.markdown(
+    f"""<style>
+     {{
+        background-color: {'#00ff00' if checked2 or checked4 else '#33CC33'};
+    }}
+    </style>""",
+    unsafe_allow_html=True,
+)
+#body
 
-# col1, col2, col3 = st.columns(3)
-# image_size = (300, 300)
-# with col2( width=image_size[0], height=image_size[1]):
-#    st.header("A cat")
-#    st.image("https://static.streamlit.io/examples/cat.jpg")
-# with col2:
-#    st.header("A dog")
-#    st.image("https://static.streamlit.io/examples/dog.jpg")
-# with col3:
-#    st.header("An owl")
-#    st.image("https://static.streamlit.io/examples/owl.jpg")
+col1, col2, col3 = st.columns(3)
+with col1:
+   st.image("https://static.streamlit.io/examples/cat.jpg")
+   st.caption("This is a cat.")
+   st.image("https://static.streamlit.io/examples/cat.jpg")
+with col2:
+   st.image("https://static.streamlit.io/examples/dog.jpg")
+   st.image("https://static.streamlit.io/examples/cat.jpg")
+with col3:
+   st.image("https://static.streamlit.io/examples/owl.jpg")
+   st.image("https://static.streamlit.io/examples/cat.jpg")
+
 page_bg_img = f"""
 <style>
 [data-testid="stAppViewContainer"] > .main {{
