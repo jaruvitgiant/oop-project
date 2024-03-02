@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import torch
+from diffusers import DiffusionPipeline as DP
+from PIL import Image, ImageDraw, ImageFont
 
 #sidebar
 st.sidebar.title("เพศ")
@@ -37,6 +40,21 @@ col2.markdown(
     unsafe_allow_html=True,
 )
 #body
+def text_to_image(text, diffuser_model):
+    #diffuser = diffusers.load_diffuser(diffuser_model)
+    #image_data = df.generate(text)
+    #image = Image.fromarray(image_data)
+    #image.show()
+    dp = DP.from_pretrained("runwayml/stable-diffusion-v1-5", 
+                            torch_dtype=torch.float16)
+    image_data = dp(text).images[0]
+    image = Image.fromarray(image_data)
+    image.show()
+
+if __name__ == "__main__":
+    input_text = "Hello, World!"
+    diffuser_model = "example_diffuser_model"
+    text_to_image(input_text, diffuser_model)
 
 col1, col2, col3 = st.columns(3)
 with col1:
