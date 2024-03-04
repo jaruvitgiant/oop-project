@@ -2,18 +2,82 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import torch
-from diffusers import DiffusionPipeline as DP
-from PIL import Image, ImageDraw, ImageFont
-
+import numpy as np
+from PIL import Image
+import diffusers
 #sidebar
 st.sidebar.title("เพศ")
 people = st.sidebar.radio("Choose", ["ชาย", "หญิง",])
 if people == "ชาย":
     st.title("ชาย")
+    col1, col2, col3 = st.columns(3)
+    for col in [col1, col2, col3]:
+        col.container().style.background_color = "white"
+    with col1:
+        st.container().style.background_color = "white"
+        st.image("img/man2 (1).jpg", use_column_width=True)
+        st.markdown("""<span style="background-color: white;">**กางเกงยีนชาย** 
+                    <br> 2000$
+                    </span>""", unsafe_allow_html=True)
+        st.image("img/img1.jpg", use_column_width=True)
+        st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
+
+    with col2:
+        st.container().style.background_color = "white"
+        st.image("img/man2 (2).jpg", use_column_width=True)
+        st.markdown("""<span style="background-color: white;">**กางเกงผู้ชายสีขาว** 
+                    <br> 2100$
+                    </span>""", unsafe_allow_html=True)
+        st.image("img/img1.jpg", use_column_width=True)
+        st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
+    with col3:
+        st.container().style.background_color = "white"
+        st.image("img/man2 (3).jpg", use_column_width=True)
+        st.markdown("""<span style="background-color: white;">**กางเกงสีน้ำเงิน** 
+                    <br> 1999$
+                    </span>""", unsafe_allow_html=True)
+        st.image("img/img1.jpg", use_column_width=True)
+        st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
+
+
 elif people == "หญิง":
     st.title("หญิง")
+    col1, col2, col3 = st.columns(3)
+    for col in [col1, col2, col3]:
+        col.container().style.background_color = "white"
+    with col1:
+        st.container().style.background_color = "white"
+        st.image("img/img1.jpg", use_column_width=True)
+        st.markdown("""<span style="background-color: white;">**กางเกงสีดำ** 
+                    <br> 2000$
+                    </span>""", unsafe_allow_html=True)
+        st.image("img/img1.jpg", use_column_width=True)
+        st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
+
+    with col2:
+        st.container().style.background_color = "white"
+        st.image("img/img2.jpg", use_column_width=True)
+        st.markdown("""<span style="background-color: white;">**กางเกงสีน้ำตาล** 
+                    <br> 2100$
+                    </span>""", unsafe_allow_html=True)
+        st.image("img/img1.jpg", use_column_width=True)
+        st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
+    with col3:
+        st.container().style.background_color = "white"
+        st.image("img/img3.jpg", use_column_width=True)
+        st.markdown("""<span style="background-color: white;">**กางเกงสีน้ำเงิน** 
+                    <br> 1999$
+                    </span>""", unsafe_allow_html=True)
+        st.image("img/img1.jpg", use_column_width=True)
+        st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
+
 st.sidebar.title("เลือกซื้อตามราคา")
-price = st.sidebar.radio("Choose", ["ต่ำกว่า2000$", "2000-4000",])
+price = st.sidebar.radio("Choose", ["ต่ำกว่า2000$", "2000-4000$",])
+if price == "ต่ำกว่า2000$":
+    st.title("ต่ำกว่า2000$")
+elif price == "2000-4000$":
+    st.title("2000-4000$")
+    
 st.sidebar.title("ลดราคา&ข้อเสนอ")
 price_offer = st.sidebar.radio("Choose", ["ล้างสต๊อก",])
 st.sidebar.title("สี")
@@ -40,33 +104,19 @@ col2.markdown(
     unsafe_allow_html=True,
 )
 #body
-def text_to_image(text, diffuser_model):
-    #diffuser = diffusers.load_diffuser(diffuser_model)
-    #image_data = df.generate(text)
-    #image = Image.fromarray(image_data)
-    #image.show()
-    dp = DP.from_pretrained("runwayml/stable-diffusion-v1-5", 
-                            torch_dtype=torch.float16)
-    image_data = dp(text).images[0]
-    image = Image.fromarray(image_data)
-    image.show()
-
-if __name__ == "__main__":
-    input_text = "Hello, World!"
-    diffuser_model = "example_diffuser_model"
-    text_to_image(input_text, diffuser_model)
-
-col1, col2, col3 = st.columns(3)
-with col1:
-   st.image("https://static.streamlit.io/examples/cat.jpg")
-   st.caption("This is a cat.")
-   st.image("https://static.streamlit.io/examples/cat.jpg")
-with col2:
-   st.image("https://static.streamlit.io/examples/dog.jpg")
-   st.image("https://static.streamlit.io/examples/cat.jpg")
-with col3:
-   st.image("https://static.streamlit.io/examples/owl.jpg")
-   st.image("https://static.streamlit.io/examples/cat.jpg")
+youtube_url = "https://youtu.be/xAciowWaCIc?si=EqlvUmHNB9BU9WHI"
+st.video(youtube_url)
+st.markdown(
+    f"""
+    <div style="float: right;">
+        <video width="640" height="360" autoplay controls style="display:none;">
+            <source src="{youtube_url}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 page_bg_img = f"""
 <style>
