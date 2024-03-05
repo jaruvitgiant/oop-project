@@ -5,7 +5,7 @@ from PIL import Image
 import diffusers
 
 sidebar = st.sidebar
-image_file = sidebar.file_uploader("อัปโหลดไฟล์ภาพ", type=["png", "jpg", "jpeg"])
+image_file = sidebar.file_uploader("อัปโหลดไฟล์ภาพสินค้า", type=["png", "jpg", "jpeg"])
 if image_file is not None:
     bytes_data = image_file.read()
     sidebar.image(bytes_data)
@@ -23,6 +23,8 @@ if image_file is not None:
             st.markdown(f"""<span style="background-color: white;">{name}
                         <br> {number_input_value}$
                         </span>""", unsafe_allow_html=True)
+            st.button("เพิ่มลงในรายการ")
+        
 
 st.sidebar.title("เพศ")
 people = st.sidebar.radio("Choose", ["ชาย", "หญิง",])
@@ -36,15 +38,16 @@ if people == "ชาย":
         st.markdown("""<span style="background-color: white;">**กางเกงยีนชาย** 
                     <br> 2000$
                     </span>""", unsafe_allow_html=True)
+        st.button("เพิ่มลงในรายการ1")
         st.image("img/img1.jpg", use_column_width=True)
         st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
-
     with col2:
         st.container().style.background_color = "white"
         st.image("img/man2 (2).jpg", use_column_width=True)
         st.markdown("""<span style="background-color: white;">**กางเกงผู้ชายสีขาว** 
                     <br> 2100$
                     </span>""", unsafe_allow_html=True)
+        st.button("เพิ่มลงในรายการ2")
         st.image("img/img1.jpg", use_column_width=True)
         st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
     with col3:
@@ -53,6 +56,7 @@ if people == "ชาย":
         st.markdown("""<span style="background-color: white;">**กางเกงสีน้ำเงิน** 
                     <br> 1999$
                     </span>""", unsafe_allow_html=True)
+        st.button("เพิ่มลงในรายการ3")
         st.image("img/img1.jpg", use_column_width=True)
         st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
 
@@ -94,9 +98,9 @@ elif people == "หญิง":
 st.sidebar.title("เลือกซื้อตามราคา")
 price = st.sidebar.radio("Choose", ["ต่ำกว่า2000$", "2000-4000$",])
 if price == "ต่ำกว่า2000$":
-    st.title("ต่ำกว่า2000$")
+    pass
 elif price == "2000-4000$":
-    st.title("2000-4000$")
+    pass
 st.sidebar.title("ลดราคา&ข้อเสนอ")
 price_offer = st.sidebar.radio("Choose", ["ล้างสต๊อก",])
 st.sidebar.title("สี")
@@ -137,20 +141,20 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-page_bg_img = f"""
-<style>
-[data-testid="stAppViewContainer"] > .main {{
-background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20230616/pngtree-3d-mountain-landscape-with-a-serene-lake-background-image_3626132.jpg");
-background-size: cover;
-background-position: center center;
-background-repeat: no-repeat;
-background-attachment: local;
-}}
-[data-testid="stHeader"] {{
-background: rgba(0,0,0,0);
-}}
-</style>
-"""
-st.markdown(page_bg_img, unsafe_allow_html=True)
+# page_bg_img = f"""
+# <style>
+# [data-testid="stAppViewContainer"] > .main {{
+# background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20230616/pngtree-3d-mountain-landscape-with-a-serene-lake-background-image_3626132.jpg");
+# background-size: cover;
+# background-position: center center;
+# background-repeat: no-repeat;
+# background-attachment: local;
+# }}
+# [data-testid="stHeader"] {{
+# background: rgba(0,0,0,0);
+# }}
+# </style>
+# """
+# st.markdown(page_bg_img, unsafe_allow_html=True)
     
 
