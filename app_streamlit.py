@@ -1,15 +1,32 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import torch
-import numpy as np
 from PIL import Image
 import diffusers
-#sidebar
+
+sidebar = st.sidebar
+image_file = sidebar.file_uploader("อัปโหลดไฟล์ภาพ", type=["png", "jpg", "jpeg"])
+if image_file is not None:
+    bytes_data = image_file.read()
+    sidebar.image(bytes_data)
+    with st.sidebar:
+        name = st.text_input("ชื่อสินค้า")
+    number_input_value = st.sidebar.number_input("ราคา", min_value=0, max_value=100, value=50)
+    button = sidebar.button("บันทึก")
+    if button:
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.container().style.background_color = "white"
+            # แสดงรูปที่อัปโหลด
+            st.container().style.background_color = "white"
+            st.image(bytes_data, use_column_width=True)
+            st.markdown(f"""<span style="background-color: white;">{name}
+                        <br> {number_input_value}$
+                        </span>""", unsafe_allow_html=True)
+
 st.sidebar.title("เพศ")
 people = st.sidebar.radio("Choose", ["ชาย", "หญิง",])
 if people == "ชาย":
-    st.title("ชาย")
     col1, col2, col3 = st.columns(3)
     for col in [col1, col2, col3]:
         col.container().style.background_color = "white"
@@ -71,13 +88,15 @@ elif people == "หญิง":
         st.image("img/img1.jpg", use_column_width=True)
         st.markdown("""**คำอธิบายภาพ 1** <br> <span style="background-color: white;">เพิ่มเติม</span>""", unsafe_allow_html=True)
 
+
+
+
 st.sidebar.title("เลือกซื้อตามราคา")
 price = st.sidebar.radio("Choose", ["ต่ำกว่า2000$", "2000-4000$",])
 if price == "ต่ำกว่า2000$":
     st.title("ต่ำกว่า2000$")
 elif price == "2000-4000$":
     st.title("2000-4000$")
-    
 st.sidebar.title("ลดราคา&ข้อเสนอ")
 price_offer = st.sidebar.radio("Choose", ["ล้างสต๊อก",])
 st.sidebar.title("สี")
