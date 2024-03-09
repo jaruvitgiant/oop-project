@@ -1,4 +1,4 @@
 import streamlit as st
-st.title("Streamlit Button Example")
+
 def show_data():
-   st.title("Streamlit Button Example")
+   price = st.number_input(label="ราคา", key="price", min_value=0, step=1)
