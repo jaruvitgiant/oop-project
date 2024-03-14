@@ -10,7 +10,7 @@
 
 
 ## presentation:
-....
+[....](https://www.canva.com/design/DAF_fd2w9a8/qzn45A0k0IPl7PfHeN9_tQ/edit)
 
 ## video:
 [....](https://youtu.be/9AfoscYji6Q)https://youtu.be/9AfoscYji6Q
